@@ -9,6 +9,14 @@ public class Domain {
     private Timestamp modified;
     private Timestamp created;
 
+    public Domain(String domainUrl) throws Exception {
+        this.domainHash = Hasher.toSha256(domainUrl);
+        this.domainUrl = domainUrl;
+        this.activated = true;
+        this.modified = CommonBal.getTimestamp();
+        this.created = CommonBal.getTimestamp();
+    }
+    
     public Domain(String domainHash, String domainUrl) {
         this.domainHash = domainHash;
         this.domainUrl = domainUrl;
