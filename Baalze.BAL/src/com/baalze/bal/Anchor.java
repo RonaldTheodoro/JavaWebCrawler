@@ -17,6 +17,16 @@ public class Anchor {
         this.anchorUrl = anchorUrl;
     }
 
+    public Anchor(Domain domain, String anchorUrl) throws Exception {
+        this.domain = domain;
+        this.anchorHash = Hasher.toSha256(anchorUrl);
+        this.anchorUrl = anchorUrl;
+        this.scanStatus = 0;
+        this.activated = true;
+        this.modified = CommonBal.getTimestamp();
+        this.created = CommonBal.getTimestamp();
+    }
+    
     public Anchor(
             Domain domain,
             String anchorHash,
