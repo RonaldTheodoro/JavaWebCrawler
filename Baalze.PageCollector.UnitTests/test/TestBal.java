@@ -6,36 +6,39 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class TestBal {
-    
-    public TestBal() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    Domain domain;
+    Anchor anchor;
+    WebPage webPage;
     
     @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+    public void setUp() throws Exception {
+        domain = new Domain("http://www.jsoup.org");
+        anchor = new Anchor(domain, "http://www.jsoup.org");
+        webPage = new WebPage(anchor);
     }
     
     @Test
-    public void testLoadDocumentFromWeb() {
-        Domain domain = new Domain("1234-5678", "http://www.jsoup.org");
-        Anchor anchor = new Anchor(domain, "1234-5678", "http://www.jsoup.org");
-        WebPage webPage = new WebPage(anchor);
+    public void testDomainHash() throws Exception {
+        assertTrue(
+            "getDomainHash: Hash is wrong length",
+            domain.getDomainHash().length() == 64
+        );
+    }
+    
+    @Test
+    public void testAnchorHash() throws Exception {
+        assertTrue(
+            "getAnchorHash: Hash is wrong length",
+            anchor.getAnchorHash().length() == 64
+        );
+    }
+    
+    @Test
+    public void testLoadDocumentFromWeb() throws Exception {
         webPage.loadDocumentFromWeb();
-        
         assertTrue("Test results", webPage.getDocument() != null);
     }
 }
