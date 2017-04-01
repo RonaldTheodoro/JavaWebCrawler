@@ -18,7 +18,23 @@ public class WebPage {
         this.anchor = anchor;
     }
     
-    private void loadDocmentFromWeb() {
+    public String getWebPageHash() {
+        return webPageHash;
+    }
+
+    public int getAnchorParserStatus() {
+        return anchorParserStatus;
+    }
+    
+    public int getEmailParserStatus() {
+        return emailParserStatus;
+    }
+
+    public Document getDocument() {
+        return document;
+    }
+    
+    public void loadDocumentFromWeb() {
         try {
             document = Jsoup.connect(anchor.getAnchorUrl()).get();
         } catch (IOException ex) {
