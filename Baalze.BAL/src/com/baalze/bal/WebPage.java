@@ -13,8 +13,12 @@ public class WebPage {
     private int emailParserStatus;
     private Document document;
     
-    public WebPage(Anchor anchor) {
+    public WebPage(Anchor anchor) throws Exception {
         this.anchor = anchor;
+        this.webPageHash = Hasher.toSha256(
+            anchor.getAnchorHash() + CommonBal.getTimestamp().toString());
+        this.anchorParserStatus = 0;
+        this.emailParserStatus = 0;
     }
     
     public String getWebPageHash() {
